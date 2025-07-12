@@ -1,0 +1,447 @@
+/* Minimalist & Neon CSS */
+body {
+  background-color: #000000; /* Black background */
+  color: #ffffff; /* Default white text */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  position: relative; /* Needed for the floating plus button */
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+h1,
+h2,
+h3 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.score-display {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+#app-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 80px; /* Space for the floating button */
+}
+
+.section {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); /* Subtle neon glow */
+  border: 1px solid #333;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.todo-item {
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  /* Border for the left side only, dynamic color */
+  border: none; /* Remove default border */
+  border-left: 8px solid; /* Bold left border, color set by JS */
+  padding-left: 15px; /* Adjust padding due to new border */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.todo-item h3 {
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.todo-item p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #bbb;
+}
+
+.todo-item.completed {
+  opacity: 0.5;
+  text-decoration: line-through;
+  border-left-color: #555 !important; /* Muted border for completed */
+}
+
+.todo-item button {
+  background-color: #00ffff; /* Neon Cyan */
+  color: #000000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+  align-self: flex-start; /* Align buttons to the start */
+}
+
+.todo-item button:hover {
+  background-color: #00cccc;
+}
+
+.todo-item .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.not-feasible-message {
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* Floating Plus Button */
+#add-todo-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #00ff00; /* Neon Green */
+  color: #000000;
+  border-radius: 50%; /* Make it round */
+  font-size: 3em;
+  line-height: 55px; /* Vertically center the plus sign */
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 255, 0, 0.4);
+  transition: background-color 0.2s, transform 0.2s;
+  z-index: 999; /* Ensure it's above other content */
+  font-weight: bold;
+}
+
+#add-todo-button:hover {
+  background-color: #00cc00;
+  transform: scale(1.05);
+}
+
+/* Form Styling for New Todo & Manage Tags */
+.overlay-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-form > div {
+  background: #2a2a2a;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.overlay-form h2 {
+  margin-top: 0;
+  color: #00ffff;
+}
+
+.overlay-form input[type="text"],
+.overlay-form input[type="date"],
+.overlay-form input[type="number"],
+.overlay-form input[type="color"],
+.overlay-form select {
+  padding: 10px;
+  border: 1px solid #00ffff;
+  border-radius: 5px;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  font-size: 1em;
+  outline: none;
+}
+
+.overlay-form input[type="text"]::placeholder,
+.overlay-form input[type="number"]::placeholder {
+  color: #bbb;
+}
+
+.overlay-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.overlay-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.overlay-form button.submit-button {
+  background: #00ff00; /* Neon Green */
+  color: black;
+}
+
+.overlay-form button.submit-button:hover {
+  background: #00cc00;
+}
+
+.overlay-form button.cancel-button {
+  background: #ff00ff; /* Neon Magenta */
+  color: black;
+}
+
+.overlay-form button.cancel-button:hover {
+  background: #cc00cc;
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-top: 5px;
+}
+.radio-group label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.radio-group input[type="radio"] {
+  margin-right: 5px;
+  accent-color: #00ffff; /* Highlight for radio buttons */
+}
+
+/* Styling for the tag spans with background colors */
+.tag-display {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.85em;
+  font-weight: bold;
+  color: #000; /* Text color for tags, assuming light backgrounds */
+  margin-left: 5px; /* Space from other text */
+  white-space: nowrap; /* Prevent tag name from wrapping */
+}
+/* Ensure readable text color based on background luminance if needed */
+.tag-display[data-bg-dark="true"] {
+  color: #fff; /* White text for dark backgrounds */
+}
+
+/* Filter Section */
+.filter-options {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
+}
+
+.filter-options select {
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border: 1px solid #00ffff;
+  outline: none;
+  cursor: pointer;
+  font-size: 0.9em;
+  flex-grow: 1; /* Allow selects to grow */
+  min-width: 120px; /* Minimum width for selects */
+}
+.filter-options button {
+  /* Style for Manage Tags button */
+  background-color: #00ffff;
+  color: #000000;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  flex-grow: 1;
+  min-width: 120px;
+}
+.filter-options button:hover {
+  background-color: #00cccc;
+}
+
+/* Clear Data Button */
+#clear-data-section {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* Red glow for danger */
+  border: 1px solid #333;
+}
+
+#clear-data-section button {
+  background-color: #ff0000; /* Red for danger */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#clear-data-section button:hover {
+  background-color: #cc0000;
+}
+
+#password-input-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+#password-input-overlay > div {
+  background: #2a2a2a;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+  width: 90%;
+  text-align: center;
+}
+
+#password-input-overlay input {
+  padding: 10px;
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  font-size: 1em;
+  outline: none;
+  text-align: center;
+}
+
+#password-input-overlay .password-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#password-input-overlay button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#password-input-overlay button#submit-password {
+  background: #ff0000;
+  color: white;
+}
+#password-input-overlay button#submit-password:hover {
+  background: #cc0000;
+}
+#password-input-overlay button#cancel-password {
+  background: #555;
+  color: white;
+}
+#password-input-overlay button#cancel-password:hover {
+  background: #777;
+}
+
+/* Score Log Styling */
+.bar-graph-container {
+  display: flex;
+  flex-direction: row; /* Bars go horizontally */
+  gap: 10px;
+  padding: 10px;
+  overflow-x: auto; /* Allow horizontal scrolling if many bars */
+  align-items: flex-end; /* Align bars to the bottom */
+  min-height: 120px; /* Ensure space for bars */
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #1f1f1f;
+}
+
+.score-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Push content to bottom of bar */
+  align-items: center;
+  background-color: #00aa00; /* Green for positive points */
+  min-width: 40px; /* Minimum width for each bar */
+  max-width: 60px; /* Max width for each bar */
+  flex-grow: 1; /* Allow bars to grow if space available */
+  border-radius: 5px 5px 0 0; /* Rounded top corners */
+  position: relative; /* For absolute positioning of points */
+  transition: height 0.3s ease-out; /* Smooth height transition */
+}
+
+.score-bar-value {
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-bottom: 5px; /* Space between value and bar top */
+  text-shadow: 0 0 3px #000; /* For better readability */
+}
+
+.score-bar-date {
+  color: #ccc;
+  font-size: 0.7em;
+  text-align: center;
+  padding: 5px 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Slightly dark background for date */
+  border-radius: 0 0 5px 5px;
+}
+
+/* Fallback for no bars */
+.bar-graph-container p {
+  width: 100%;
+}

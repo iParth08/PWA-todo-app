@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My PWA App</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2196f3" />
+    <link rel="icon" href="icon-192.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>Project Sentinel</h1>
+    <p
+      id="current-date-display"
+      style="text-align: center; color: #00ffff; font-size: 1.1em"
+    ></p>
+    <div class="score-display">
+      <span id="today-score-display">Today's Score: 0</span> |
+      <span id="total-score-display">Total Score: 0</span>
+    </div>
+
+    <div id="app-container">
+      <div class="section filter-options">
+        <h2>Filter & Sort</h2>
+        <select id="tag-filter-select">
+          <option value="">All Tags</option>
+        </select>
+        <select id="deadline-filter-select">
+          <option value="">All Deadlines</option>
+          <option value="today">Today</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past Due</option>
+        </select>
+        <select id="priority-sort-select">
+          <option value="">All Priorities</option>
+          <option value="1">Priority 1 (High)</option>
+          <option value="2">Priority 2 (Medium)</option>
+          <option value="3">Priority 3 (Low)</option>
+        </select>
+        <button id="manage-tags-button">Manage Tags</button>
+      </div>
+
+      <div class="section">
+        <h2>Today's Todo</h2>
+        <div id="active-todos-container" class="todo-list">
+          <p style="text-align: center; color: #888">
+            Click the green plus button to add a new todo!
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Completed Todos</h2>
+        <div id="completed-todos-container" class="todo-list"></div>
+      </div>
+      <div class="section">
+        <h2>Score Transfer Log</h2>
+        <div id="score-log-container" class="bar-graph-container">
+          <p style="text-align: center; color: #888">
+            No score transfers recorded yet.
+          </p>
+        </div>
+      </div>
+
+      <div id="clear-data-section">
+        <h2>Danger Zone</h2>
+        <button id="clear-all-data-button">
+          Clear All Data (Password Protected)
+        </button>
+      </div>
+    </div>
+
+    <button id="add-todo-button">+</button>
+    <script src="main.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
