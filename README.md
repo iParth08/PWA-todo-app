@@ -1,8 +1,3 @@
-Absolutely! Here's a **beautifully formatted `README.md`** with badges, emojis, full Markdown styling, and example code blocks — perfect for your **"Super Todo"** PWA built with HTML, CSS, and JS.
-
----
-
-```markdown
 # 📝 Super Todo - PWA Task Manager
 
 [![PWA Badge](https://img.shields.io/badge/PWA-Ready-blue?logo=googlechrome)](https://web.dev/progressive-web-apps/)
@@ -31,9 +26,7 @@ Absolutely! Here's a **beautifully formatted `README.md`** with badges, emojis, 
 
 ## 📸 Screenshots
 
-| Desktop View                   | Mobile View                   |
-| ------------------------------ | ----------------------------- |
-| ![](./screenshots/desktop.png) | ![](./screenshots/mobile.png) |
+![image](./screenshots/desktop.png)
 
 ---
 
@@ -51,6 +44,7 @@ Absolutely! Here's a **beautifully formatted `README.md`** with badges, emojis, 
 ---
 
 ## 📦 Project Structure
+
 ```
 
 📁 super-todo/
@@ -62,7 +56,7 @@ Absolutely! Here's a **beautifully formatted `README.md`** with badges, emojis, 
 ├── sw\.js
 └── icons/
 
-````
+```
 
 ---
 
@@ -72,7 +66,7 @@ Absolutely! Here's a **beautifully formatted `README.md`** with badges, emojis, 
 git clone https://github.com/your-username/super-todo.git
 cd super-todo
 # Just open index.html in your browser!
-````
+```
 
 ---
 
